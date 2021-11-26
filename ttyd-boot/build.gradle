@@ -1,0 +1,28 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'in.faeli'
+version = '0.0.1'
+sourceCompatibility = '8'
+
+repositories {
+	mavenCentral()
+	maven {
+		url  "https://dl.bintray.com/jetbrains/pty4j/"
+	}
+}
+
+dependencies {
+	implementation project(':ttyd-core')
+	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}

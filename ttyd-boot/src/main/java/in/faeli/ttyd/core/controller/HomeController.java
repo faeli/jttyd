@@ -1,4 +1,4 @@
-package in.faeli.ttyd.controller;
+package in.faeli.ttyd.core.controller;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;

@@ -1,11 +1,14 @@
-package in.faeli.ttyd;
+package in.faeli.ttyd.core;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-@org.springframework.context.annotation.Configuration
+
+@Configuration
 @ConfigurationProperties(prefix = "terminal")
-public class Config {
+@ConditionalOnProperty(value = "terminal.enabled", havingValue = "true",matchIfMissing = false)
+public class TerminalConfig {
     private Boolean enabled;
     private SocketConfig socket;
     private String shell;

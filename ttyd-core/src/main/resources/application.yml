@@ -1,0 +1,4 @@
+terminal:
+  enabled: true
+  socket:
+    path: /terminal

@@ -1,4 +1,4 @@
-package in.faeli.ttyd.helper;
+package in.faeli.ttyd.core.helper;
 
 import java.io.Closeable;
 import java.io.IOException;

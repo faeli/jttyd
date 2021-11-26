@@ -1,7 +1,8 @@
-package in.faeli.ttyd;
+package in.faeli.ttyd.core;
 
-import in.faeli.ttyd.websocket.TerminalSocket;
+import in.faeli.ttyd.core.websocket.TerminalSocket;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -14,12 +15,16 @@ import java.util.Objects;
 
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer {
+@ConditionalOnProperty(value = "terminal.enabled", havingValue = "true")
+public class TerminalWebSocketConfig implements WebSocketConfigurer {
     @Autowired
-    private Config config;
+    private TerminalConfig config;
+
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(terminalSocket(),getHandlerPath());
+        final String handlerPath = getHandlerPath();
+        System.out.println("REGISTER TERMINAL WEB SOCKET: " + handlerPath);
+        registry.addHandler(terminalSocket(), handlerPath);
     }
 
     private String getHandlerPath() {
@@ -30,8 +35,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     }
 
     @Bean
-    public WebSocketHandler terminalSocket()
-    {
+    public WebSocketHandler terminalSocket() {
         return new PerConnectionWebSocketHandler(TerminalSocket.class);
     }
 }

@@ -1,8 +1,8 @@
-package in.faeli.ttyd.websocket;
+package in.faeli.ttyd.core.websocket;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import in.faeli.ttyd.service.TerminalService;
+import in.faeli.ttyd.core.service.TerminalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;

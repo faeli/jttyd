@@ -1,4 +1,4 @@
-package in.faeli.ttyd.service;
+package in.faeli.ttyd.core.service;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -11,21 +11,20 @@ import java.util.concurrent.LinkedBlockingQueue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pty4j.PtyProcess;
 import com.pty4j.WinSize;
-import in.faeli.ttyd.helper.ThreadHelper;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import in.faeli.ttyd.core.helper.ThreadHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import in.faeli.ttyd.Config;
-import in.faeli.ttyd.helper.IOHelper;
+import in.faeli.ttyd.core.TerminalConfig;
+import in.faeli.ttyd.core.helper.IOHelper;
 
 @Component
 public class TerminalService {
     @Autowired
-    private Config config;
+    private TerminalConfig config;
 
     private boolean isReady;
     private PtyProcess process;
@@ -58,7 +57,7 @@ public class TerminalService {
         final Path dataDir = Paths.get(userHome).resolve(".terminalfx");
         IOHelper.copyLibPty(dataDir);
         if (StringUtils.startsWithIgnoreCase(osName, "win")) {
-            this.termCommand = "cmd.exe".split("\\s+");
+            this.termCommand = "powershell.exe".split("\\s+");
         } else {
             this.termCommand = "/bin/bash -i".split("\\s+");
         }
